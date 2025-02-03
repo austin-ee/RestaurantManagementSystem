@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>foodstore</title>
+<link type="text/css" rel="stylesheet"   href="index.css">
+</head>
+<body class="homepage">
+ <nav id="nav">
+   <div id="logo" align="center">Food Store</div>
+   <div id="mnav">
+        <ul type="none">
+	       <li id="home"><a href="#">Home</a></li>
+	       <li id="services"><a href="#">Services</a></li>
+	       <li id="location"><a href="#">Location</a></li>
+	       <li id="login" class="login"><a href="#">Login</a>
+		                               <div class="dropdown">
+                                          <a href="#" onclick="loginpage()">Client</a>
+                                          <a href="#" onclick="loginpage()">Staff</a>
+                                      </div></li>
+        </ul></div>
+ </nav>
+ <section id="message"></section>
+ <div id="loginpage">
+    <form id="loginform">
+	  <b id="heading">Enter Details To Login:</b></br>
+      <input type="email" placeholder="Username" id="name" Required><br>
+	  <input type="password" placeholder="Password" id="key" Required><br>
+	  <label id="fpass">Forgot Password?</label><br>
+	  <button type="submit">Login</button></br>
+	  <label id="query">Don't have account?</label>  <label id="register">Register</label>
+    </form>
+ </div>
+ <script src="userIn.js"></script>
+</body>
+</html>
