@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="ISO-8859-1">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Manager page</title>
+   <link type="text/css" rel="stylesheet" href="admin.css">
+ </head>
+ <body class="admin">
+   <nav id="nav">
+      <div id="logo" align="left">Food Store</div>
+      <div id="mnav" align="right"><ul type="none">
+	                <li id="notes"><a href="#">Notifications</a></li>
+	                <li id="logout"><a href="#">Logout</a></li>
+        </ul></div>
+  </nav>
+  <div id="disparea">
+    <div id="aside">
+        <ul type="none">
+            <li id="home" class="nav"><a href="employee.html">Home</a></li>
+            <li id="employee" class="nav">
+                <a href="#" onclick="toggleMenu(event)">Employee 
+                    <span class="arrow">&#9660;</span>
+                </a>
+                <ul class="menu" type="none">
+                    <li class="item" onclick"fetchData('employees')">Employees</li>
+                    <li class="item">On Leave</li>
+                    <li class="item">Schedule</li>
+                </ul>
+            </li>
+            <li id="inventory" class="nav"><a href="#" onclick="">Inventory</a></li>
+            <li id="orders" class="nav"><a href="#" onclick="">Orders</a></li>
+            <li id="reservation" class="nav"><a href="#">Reservations</a></li>
+            <li id="messages" class="nav"><a href="#" onclick="">Messages</a></li>
+            <li id="reports" class="nav"><a href="#">Reports</a></li>
+        </ul>
+    </div>
+ <section class="data" id="dataTable" align="center"></section></div>
+ 
+ <script src="admin.js"></script>
+ </body>
+</html>
