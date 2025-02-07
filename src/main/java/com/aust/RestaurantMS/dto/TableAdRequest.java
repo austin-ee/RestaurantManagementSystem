@@ -10,7 +10,17 @@ package com.aust.RestaurantMS.dto;
  */
 public class TableAdRequest {
    private String chairs;
+   private String location;
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+   
     public String getChairs() {
         return chairs;
     }

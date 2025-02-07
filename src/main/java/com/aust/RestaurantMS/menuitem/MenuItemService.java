@@ -5,6 +5,8 @@
 package com.aust.RestaurantMS.menuitem;
 
 import com.aust.RestaurantMS.dto.ItemRequest;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,19 +24,25 @@ public class MenuItemService {
         return menuItemRepository.findAll();
     }
     protected MenuItem add(ItemRequest params){
-        return menuItemRepository.save(new MenuItem(12121313L,params.getObj(),params.getTime(),params.getChildren(),
+        return menuItemRepository.save(new MenuItem(generateId(params.getTime()),params.getObj(),params.getTime(),params.getChildren(),
         Integer.parseInt(params.getValue())));
     }
     protected void remove(String i){
-       menuItemRepository.delete(menuItemRepository.getReferenceById(Long.parseLong(i)));
+       menuItemRepository.delete(menuItemRepository.getReferenceById(i));
     }
     protected void update(ItemRequest params){
-        menuItemRepository.updateItem(Long.parseLong(params.getMenuid()), params.getChildren(),params.getTime(),params.getValue());
+        menuItemRepository.updateItem(params.getMenuid(), params.getChildren(),params.getTime(),params.getValue());
     }
     protected List<MenuItem> typeItems(String time){
         return menuItemRepository.typeMenu(time);
     }
     protected MenuItem itemDetails(String id){
-        return menuItemRepository.getReferenceById(Long.parseLong(id));
+        return menuItemRepository.getReferenceById(id);
     }
+     private String generateId(String type){
+       LocalDate dt=LocalDate.now();
+       LocalTime tm=LocalTime.now();
+       String y=type.substring(0, 2)+String.valueOf(dt.getYear()).substring(2)+dt.getMonthValue()+dt.getDayOfMonth()+tm.getHour()+tm.getMinute()+String.valueOf(10*Math.random());
+       return y;
+    } 
 }

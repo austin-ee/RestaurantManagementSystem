@@ -5,6 +5,7 @@
 package com.aust.RestaurantMS.Inventory;
 
 import com.aust.RestaurantMS.dto.ItemAdRequest;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class InventoryService {
         return inventoryRepository.findAll();
     }
     protected Inventory create(ItemAdRequest params){
-        return inventoryRepository.save(new Inventory(11544L,params.getName(),Integer.parseInt(params.getQuantity()),
+        return inventoryRepository.save(new Inventory(generateId(),params.getName(),Integer.parseInt(params.getQuantity()),
         Integer.parseInt(params.getMinQuant()),params.getSinfo()));
     }
     protected int removeItem(Long id,int quant){
@@ -36,4 +37,9 @@ public class InventoryService {
     protected Inventory inventoryItemDet(String id){
         return inventoryRepository.getReferenceById(Long.parseLong(id));
     }
+     private Long generateId(){
+       LocalDate dt=LocalDate.now();
+       String y=String.valueOf(10*Math.random())+String.valueOf(dt.getYear()).substring(2)+dt.getMonthValue()+dt.getDayOfMonth()+String.valueOf(10*Math.random());
+       return Long.valueOf(y);
+    } 
 }

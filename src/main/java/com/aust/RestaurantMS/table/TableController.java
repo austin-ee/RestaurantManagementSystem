@@ -45,6 +45,6 @@ public class TableController {
     }
     @PostMapping("/tdet")
     public TableDetails table(@RequestParam("table") String id){
-        return tableService.getTDetails(Long.parseLong(id));
+        return tableService.getTDetails(id);
     }
 }

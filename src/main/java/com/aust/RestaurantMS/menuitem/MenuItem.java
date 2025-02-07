@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name="menuItem")
 public class MenuItem {
     @Id
-    private Long menuId;
+    private String menuId;
     private String name;
     private String type;
     private String items;
@@ -31,7 +31,7 @@ public class MenuItem {
     public MenuItem() {
     }
 
-    public MenuItem(Long menuId, String name, String type, String items,int price) {
+    public MenuItem(String menuId, String name, String type, String items,int price) {
         this.menuId = menuId;
         this.name = name;
         this.type = type;
@@ -55,11 +55,11 @@ public class MenuItem {
         this.price = price;
     }
 
-    public Long getMenuId() {
+    public String getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(Long menuId) {
+    public void setMenuId(String menuId) {
         this.menuId = menuId;
     }
 

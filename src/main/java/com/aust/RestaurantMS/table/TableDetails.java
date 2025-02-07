@@ -23,7 +23,7 @@ import java.util.List;
 public class TableDetails {
     @Id
     @Column(name="tableno")
-    private Long Tableno;
+    private String Tableno;
     @Column(name="no_of_chairs")
     private int Chairs;
     @Column(name="status")
@@ -34,21 +34,21 @@ public class TableDetails {
     public TableDetails() {
     }
 
-    public TableDetails(Long Tableno) {
+    public TableDetails(String Tableno) {
         this.Tableno = Tableno;
     }
     
-    public TableDetails(Long Tableno, int Chairs, String status) {
+    public TableDetails(String Tableno, int Chairs, String status) {
         this.Tableno = Tableno;
         this.Chairs = Chairs;
         this.Status = status;
     }
 
-    public Long getTableno() {
+    public String getTableno() {
         return Tableno;
     }
 
-    public void setTableno(Long Tableno) {
+    public void setTableno(String Tableno) {
         this.Tableno = Tableno;
     }
 

@@ -15,12 +15,12 @@ import org.springframework.stereotype.Repository;
  * @author steve
  */
 @Repository
-interface TableRepository extends JpaRepository<TableDetails,Long> {
+interface TableRepository extends JpaRepository<TableDetails,String> {
     @Query(value="SELECT * from table_details where status=?1",nativeQuery=true)
     List<TableDetails> findAvailable(String stat);
     @Modifying
     @Query(value="UPDATE table_details SET status=?2 WHERE tableno=?1",nativeQuery=true)
-    void updateStatus(Long id,String status);
+    void updateStatus(String id,String status);
     @Query(value="SELECT * from table_details WHERE status=?1",nativeQuery=true)
     List<TableDetails> status(String status);
 }

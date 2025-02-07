@@ -7,6 +7,7 @@ package com.aust.RestaurantMS.order;
 import com.aust.RestaurantMS.customer.CustomerRepository;
 import com.aust.RestaurantMS.dto.OrderRequest;
 import com.aust.RestaurantMS.menuitem.MenuItemRepository;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
@@ -35,8 +36,8 @@ public class OrderService {
     protected Order create(OrderRequest params){
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
         if(auth !=null && auth.isAuthenticated()){
-         return oderRepository.save(new Order(23455L,customerRepository.getReferenceById(auth.getName()),
-         menuItemRepository.getReferenceById(Long.parseLong(params.getItem())),Integer.parseInt(params.getMuch()),params.getSrequest(),"Pending",LocalTime.now()));}
+         return oderRepository.save(new Order(generateId(),customerRepository.getReferenceById(auth.getName()),
+         menuItemRepository.getReferenceById(params.getItem()),Integer.parseInt(params.getMuch()),params.getSrequest(),"Pending",LocalTime.now()));}
         else{return null;}
     }
     protected Order specific(Long id){
@@ -53,4 +54,10 @@ public class OrderService {
     protected float generateBill(Long orderid){
         return 0.0f;
     }
+    private Long generateId(){
+       LocalDate dt=LocalDate.now();
+       LocalTime tm=LocalTime.now();
+       String y=String.valueOf(dt.getYear()).substring(2)+dt.getMonthValue()+dt.getDayOfMonth()+tm.getHour()+tm.getMinute()+String.valueOf(10*Math.random());
+       return Long.valueOf(y);
+    } 
 }

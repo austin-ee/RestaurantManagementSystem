@@ -30,7 +30,7 @@ public class ScheduleService {
        return scheduleRepository.empSchedule(id);
     }
     protected Schedule create(SchedulingRequest params){
-        return scheduleRepository.save(new Schedule(121213L,employeeRepository.getReferenceById(params.getEmpid()),
+        return scheduleRepository.save(new Schedule(generateId(),employeeRepository.getReferenceById(params.getEmpid()),
         LocalDate.parse(params.getDate()),LocalTime.parse(params.getStart()),LocalTime.parse(params.getEnd())));
     }
     protected void update(SchedulingRequest params){
@@ -40,5 +40,9 @@ public class ScheduleService {
     protected void cancelSchedule(Long id){
         scheduleRepository.delete(scheduleRepository.getReferenceById(id));
     }
-        
+    private Long generateId(){
+       LocalDate dt=LocalDate.now();
+       String y=String.valueOf(10*Math.random())+String.valueOf(dt.getYear()).substring(2)+String.valueOf(100*Math.random())+dt.getMonthValue()+String.valueOf(10*Math.random());
+       return Long.valueOf(y);
+    }      
 }
