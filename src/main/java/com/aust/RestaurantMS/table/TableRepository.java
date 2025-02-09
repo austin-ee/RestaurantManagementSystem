@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author steve
  */
 @Repository
-interface TableRepository extends JpaRepository<TableDetails,String> {
+public interface TableRepository extends JpaRepository<TableDetails,String> {
     @Query(value="SELECT * from table_details where status=?1",nativeQuery=true)
     List<TableDetails> findAvailable(String stat);
     @Modifying

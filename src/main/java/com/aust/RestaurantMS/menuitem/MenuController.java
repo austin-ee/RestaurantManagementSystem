@@ -4,7 +4,7 @@
  */
 package com.aust.RestaurantMS.menuitem;
 
-import com.aust.RestaurantMS.dto.ItemRequest;
+import com.aust.RestaurantMS.dto.MenuItemRequest;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public class MenuController {
       return menuService.allItems();
     }
     @PostMapping("/add")
-    public ResponseEntity<?> adjust(@RequestBody ItemRequest params){
+    public ResponseEntity<?> adjust(@RequestBody MenuItemRequest params){
        return (menuService.add(params)!=null)?ResponseEntity.ok().body("Added Successfully"):ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Operation failed");
     }
     @DeleteMapping("/del") 
@@ -40,7 +40,7 @@ public class MenuController {
         menuService.remove(item);
     }
     @PostMapping("/upt")
-    public void update(@RequestBody ItemRequest params){
+    public void update(@RequestBody MenuItemRequest params){
         menuService.update(params);
     }
     @PostMapping("/det")

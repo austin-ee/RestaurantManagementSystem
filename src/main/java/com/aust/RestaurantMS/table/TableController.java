@@ -27,7 +27,7 @@ public class TableController {
     private TableService tableService;
         
     @GetMapping
-    public List<TableDetails> tables(@RequestParam String status){
+    public List<TableDetails> tables(){
         return tableService.findAll();
     }
     @PostMapping("/add")
@@ -44,7 +44,7 @@ public class TableController {
       return tableService.getStatus(status);
     }
     @PostMapping("/tdet")
-    public TableDetails table(@RequestParam("table") String id){
+    public TableAdRequest table(@RequestParam("table") String id){
         return tableService.getTDetails(id);
     }
 }

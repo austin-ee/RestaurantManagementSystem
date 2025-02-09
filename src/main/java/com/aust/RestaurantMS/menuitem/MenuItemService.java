@@ -4,7 +4,7 @@
  */
 package com.aust.RestaurantMS.menuitem;
 
-import com.aust.RestaurantMS.dto.ItemRequest;
+import com.aust.RestaurantMS.dto.MenuItemRequest;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -23,14 +23,14 @@ public class MenuItemService {
     protected List<MenuItem> allItems(){
         return menuItemRepository.findAll();
     }
-    protected MenuItem add(ItemRequest params){
+    protected MenuItem add(MenuItemRequest params){
         return menuItemRepository.save(new MenuItem(generateId(params.getTime()),params.getObj(),params.getTime(),params.getChildren(),
         Integer.parseInt(params.getValue())));
     }
     protected void remove(String i){
        menuItemRepository.delete(menuItemRepository.getReferenceById(i));
     }
-    protected void update(ItemRequest params){
+    protected void update(MenuItemRequest params){
         menuItemRepository.updateItem(params.getMenuid(), params.getChildren(),params.getTime(),params.getValue());
     }
     protected List<MenuItem> typeItems(String time){
@@ -42,7 +42,7 @@ public class MenuItemService {
      private String generateId(String type){
        LocalDate dt=LocalDate.now();
        LocalTime tm=LocalTime.now();
-       String y=type.substring(0, 2)+String.valueOf(dt.getYear()).substring(2)+dt.getMonthValue()+dt.getDayOfMonth()+tm.getHour()+tm.getMinute()+String.valueOf(10*Math.random());
+       String y=type.substring(0, 2)+String.valueOf(dt.getYear()).substring(2)+dt.getMonthValue()+dt.getDayOfMonth()+tm.getHour()+tm.getMinute()+String.valueOf(Math.round(10*Math.random()));
        return y;
     } 
 }

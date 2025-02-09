@@ -4,8 +4,6 @@
  */
 package com.aust.RestaurantMS.dto;
 
-import java.time.LocalTime;
-
 /**
  *
  * @author steve

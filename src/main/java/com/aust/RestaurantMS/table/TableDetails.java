@@ -33,10 +33,6 @@ public class TableDetails {
     
     public TableDetails() {
     }
-
-    public TableDetails(String Tableno) {
-        this.Tableno = Tableno;
-    }
     
     public TableDetails(String Tableno, int Chairs, String status) {
         this.Tableno = Tableno;

@@ -8,7 +8,7 @@ import com.aust.RestaurantMS.order.Order;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class MenuItem {
     private String type;
     private String items;
     private int price;
-    @OneToMany(mappedBy="menuItem",cascade=CascadeType.ALL)
+    @ManyToMany(mappedBy="menuItem",cascade=CascadeType.ALL)
     private List<Order> orders;
 
     public MenuItem() {

@@ -4,21 +4,32 @@
  */
 package com.aust.RestaurantMS.dto;
 
+import java.util.List;
+
 /**
  *
  * @author steve
  */
 public class OrderRequest {
-    private String item;
+    private List<String> item;
     private String much;
     private String srequest;
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
     
 
-    public String getItem() {
+    public List<String> getItem() {
         return item;
     }
 
-    public void setItem(String item) {
+    public void setItem(List<String> item) {
         this.item = item;
     }
 

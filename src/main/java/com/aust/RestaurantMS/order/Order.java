@@ -9,9 +9,11 @@ import com.aust.RestaurantMS.menuitem.MenuItem;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  *
@@ -25,9 +27,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="customer_id", nullable=false)
     private Customer customer;
-    @ManyToOne
-    @JoinColumn(name="menuitem",nullable=false)
-    private MenuItem menuItem;
+    @ManyToMany
+    private List<MenuItem> menuItem;
     private int quantity;
     private String specialRequests;
     private String status; 
@@ -36,7 +37,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long orderID, Customer customer, MenuItem menuItem, int quantity, String specialRequests, String status, LocalTime ordertime) {
+    public Order(Long orderID, Customer customer, List<MenuItem> menuItem, int quantity, String specialRequests, String status, LocalTime ordertime) {
         this.orderID = orderID;
         this.customer = customer;
         this.menuItem = menuItem;
@@ -71,11 +72,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public MenuItem getOrderItem() {
+    public List<MenuItem> getOrderItem() {
         return menuItem;
     }
 
-    public void setoderItem(MenuItem menuItem) {
+    public void setoderItem(List<MenuItem> menuItem) {
         this.menuItem = menuItem;
     }
 

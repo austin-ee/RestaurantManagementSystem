@@ -6,8 +6,11 @@ package com.aust.RestaurantMS.reservation;
 
 import com.aust.RestaurantMS.config.ConfigRepository;
 import com.aust.RestaurantMS.customer.Customer;
+import com.aust.RestaurantMS.customer.CustomerRepository;
 import com.aust.RestaurantMS.dto.ReservationRequest;
 import com.aust.RestaurantMS.table.TableDetails;
+import com.aust.RestaurantMS.table.TableRepository;
+import com.aust.RestaurantMS.user.JavaMailService;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -26,16 +29,33 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
     @Autowired
     private ConfigRepository configRepo;
+    @Autowired
+    private JavaMailService jms;
+    @Autowired
+    private CustomerRepository cusRepo;
+    @Autowired
+    private TableRepository tableRepo;
 
     public Reservation reserve(ReservationRequest params){
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-        if(auth !=null&& auth.isAuthenticated()){
-           Reservation rs=reservationRepository.save(new Reservation(generatereservationId(),
-           new TableDetails(params.getTable()),LocalDate.parse(params.getDate()),
-           LocalTime.parse(params.getTime()),Integer.parseInt(params.getGuests()),"Pendimg",new Customer("112233as")));/*new Customer(auth.getName())*/
-        return (rs!=null)?rs:null;
+        Reservation rs=null;
+        try{
+           if(auth !=null&& auth.isAuthenticated()){
+             rs=reservationRepository.save(new Reservation(generatereservationId(),
+            tableRepo.getReferenceById(params.getTable()),LocalDate.parse(params.getDate()),
+             LocalTime.parse(params.getTime()),Integer.parseInt(params.getGuests()),"Pendimg",new Customer(auth.getName())));/*new Customer(auth.getName())*/
+             if(rs!=null){
+                 String msg="Hello "+cusRepo.getReferenceById(auth.getName()).getName()+
+                 ", your request to make a reservation on "+params.getDate()+" at "+params.getTime()+" was successful";
+                 jms.sendMail(auth.getName(), msg, "Reservation Successful...");
+             }
+           }}
+        catch(Exception e){
+             String msg="Hello "+cusRepo.getReferenceById(auth.getName()).getName()+
+             ", your request to make a reservation on "+params.getDate()+" was not successful.We recommend you try again or Dial: 0768909403 for help";
+             jms.sendMail(auth.getName(), msg, "Reservation Failure!!!");
         }
-        else{return null;}
+        return rs;
     }
     //my Reservations
     protected List<Reservation> myReservations(String id,String status){

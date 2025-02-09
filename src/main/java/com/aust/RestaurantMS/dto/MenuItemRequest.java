@@ -8,7 +8,7 @@ package com.aust.RestaurantMS.dto;
  *
  * @author steve
  */
-public class ItemRequest {
+public class MenuItemRequest {
     private String menuid;
     private String obj;
     private String time;
